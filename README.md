@@ -19,3 +19,9 @@ At the end of your script, report success (or failure)
 ```
 Invoke-HealthChecksIOStatusReport -Success -uuid $cfgUUID
 ```
+
+You may want to report logs too, you can do this with the -AttachLogs parameter, allowing you to post arbitrary string data on success/failure.
+
+```
+Invoke-HealthChecksIOStatusReport -Success -uuid $cfgUUID -AttachLogs ($error|out-string)
+```

@@ -11,7 +11,8 @@
         [Parameter(ParameterSetName='Failure')][Switch]$Failure,
         [Parameter(ParameterSetName='Start')][Switch]$Start,
         [Parameter(Mandatory=$true)][string]$uuid,
-        [Parameter()][string]$AttachLogs
+        [Parameter()][string]$AttachLogs,
+	    [Parameter()][Int32]$TimeoutSec = 10
         )
 
     $uri = "https://hc-ping.com/$uuid"
@@ -20,9 +21,15 @@
     If($Failure){ $uri += "/fail" }
     If($Start){ $uri += "/start"}
 
+    $irmArguments = @{
+	Uri = $uri
+	UseBasicParsing = $true
+	TimeoutSec = $TimeoutSec
+    }
+
     $httpRes = $null
     try
-    { 
+    {
         if($null -ne $AttachLogs)
         {
             # See https://healthchecks.io/docs/attaching_logs/
@@ -30,11 +37,11 @@
             # request body. If the request body looks like a UTF-8 string,
             # Healthchecks.io will log the first 10 kilobytes of the request
             # body, so you can inspect it later.
-            $httpRes = Invoke-RestMethod -Uri $uri -UseBasicParsing -Method Post -Body $AttachLogs
+            $httpRes = Invoke-RestMethod -Method Post -Body $AttachLogs @irmArguments
         }
         else
         {
-            $httpRes = Invoke-RestMethod -Uri $uri -UseBasicParsing
+            $httpRes = Invoke-RestMethod @irmArguments
         }
     }
     catch

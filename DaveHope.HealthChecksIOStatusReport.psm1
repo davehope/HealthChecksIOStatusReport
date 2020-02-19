@@ -23,7 +23,6 @@
 
     $irmArguments = @{
 	Uri = $uri
-	UseBasicParsing = $true
 	TimeoutSec = $TimeoutSec
     }
 

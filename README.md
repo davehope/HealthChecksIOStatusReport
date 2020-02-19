@@ -1,5 +1,6 @@
 # HealthChecksIOStatusReport
-Powershell module to quickly report status to HealthChecks.io
+Powershell module to quickly report status to HealthChecks.io , this module
+targets PowerShell 4.0 and later (supporting Windows Server 2012R2 and later).
 
 
 ## Usage

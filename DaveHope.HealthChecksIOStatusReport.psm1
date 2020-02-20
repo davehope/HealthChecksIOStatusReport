@@ -37,6 +37,7 @@
             # Healthchecks.io will log the first 10 kilobytes of the request
             # body, so you can inspect it later.
             $httpRes = Invoke-RestMethod -Method Post -Body $AttachLogs @irmArguments
+            Write-Debug "Received $($httpRes.StatusCode) from $uri"
         }
         else
         {

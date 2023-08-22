@@ -1,4 +1,4 @@
-﻿Function Invoke-HealthChecksIOStatusReport
+Function Invoke-HealthChecksIOStatusReport
 {
     <#
     .SYNOPSIS
@@ -7,13 +7,13 @@
     #>
     [cmdletbinding()]
     Param(
-        [Parameter(ParameterSetName='Success')][Switch]$Success,
-        [Parameter(ParameterSetName='Failure')][Switch]$Failure,
-        [Parameter(ParameterSetName='Start')][Switch]$Start,
+        [Parameter(ParameterSetName = 'Success')][Switch]$Success,
+        [Parameter(ParameterSetName = 'Failure')][Switch]$Failure,
+        [Parameter(ParameterSetName = 'Start')][Switch]$Start,
         [Parameter(Mandatory)][string]$uuid,
         [Parameter()][string]$AttachLogs,
-	    [Parameter()][Int32]$TimeoutSec = 10
-        )
+        [Parameter()][Int32]$TimeoutSec = 10
+    )
 
     $uri = 'https://hc-ping.com/' + $uuid
 
@@ -22,8 +22,8 @@
     If($Start){ $uri += '/start' }
 
     $irmArguments = @{
-	    Uri        = $uri
-	    TimeoutSec = $TimeoutSec
+        Uri        = $uri
+        TimeoutSec = $TimeoutSec
     }
 
     # WindowsPowerShell 5.1 will likely be set to 'Ssl3, Tls' (SSL3, TLS1.0) on
